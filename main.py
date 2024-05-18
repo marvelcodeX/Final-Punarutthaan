@@ -5,6 +5,12 @@ import os
 # Initialize Pygame
 pygame.init()
 
+pygame.mixer.init()
+
+# Load and play background music
+pygame.mixer.music.load('bgmusic.dat.mp3') 
+pygame.mixer.music.play(-1)
+
 # Screen dimensions
 WIDTH, HEIGHT = 900, 650
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -18,7 +24,7 @@ TEAL = (255, 255, 255)
 LIGHT_GRAY = (160, 160, 160)
 
 # Load background image
-background = pygame.image.load('background.jpg')
+background = pygame.image.load('background2.jpg')
 background = pygame.transform.scale(background, (WIDTH, HEIGHT))
 
 # Load traditional-looking fonts
@@ -96,11 +102,11 @@ def main_menu():
                 mouse_x, mouse_y = event.pos
                 if button_x <= mouse_x <= button_x + button_width:
                     if button_y_start <= mouse_y <= button_y_start + button_height:
-                        launch_game("pallankuzhi")
+                        launch_game("Pallankuzhi")
                     elif button_y_start + 2 * (button_height + button_padding) <= mouse_y <= button_y_start + 3 * button_height + 2 * button_padding:
-                        launch_game("ludo")
+                        launch_game("Pagade")
                     elif button_y_start + 4 * (button_height + button_padding) <= mouse_y <= button_y_start + 5 * button_height + 4 * button_padding:
-                        launch_game("tiger_and_lambs")
+                        launch_game("Aadu Puli Aatam")
                 # Link clicks
                 if button_y_start + button_height <= mouse_y <= button_y_start + button_height + link_padding:
                     if button_x + button_width // 4 - 30 <= mouse_x <= button_x + button_width // 4 + 30:
@@ -120,9 +126,71 @@ def main_menu():
 
     pygame.quit()
 
-def launch_game(game_name):
+'''def launch_game(game_name):
     game_path = os.path.join(os.getcwd(), game_name, f"{game_name}.py")
     subprocess.run(["python", game_path])
+def launch_game(game_name):
+    if game_name == "Pagade":
+        game_path = os.path.join(os.getcwd(), "Ludo-Python-game", "main.py")
+    else:
+        game_path = os.path.join(os.getcwd(), game_name, f"{game_name}.py")
+    subprocess.run(["python", game_path])'''
+
+'''def launch_game(game_name):
+    if game_name == "Pagade":
+        game_path = os.path.join(os.getcwd(), "Ludo-Python-game-", "Ludogame.py")
+    else:
+        game_path = os.path.join(os.getcwd(), game_name, f"{game_name}.py")
+    subprocess.run(["python", game_path])'''
+
+def launch_game(game_name):
+    print(f"Current working directory: {os.getcwd()}")
+    if game_name == "Pagade":
+        game_dir = os.path.join(os.getcwd(), "Ludo-Python-game-")
+        game_path = os.path.join(game_dir, "Ludogame.py")
+    else:
+        game_dir = os.path.join(os.getcwd(), game_name)
+        game_path = os.path.join(game_dir, f"{game_name}.py")
+    
+    print(f"Attempting to launch game at path: {game_path}")
+    if os.path.isfile(game_path):
+        # Run the game in a separate process and change the working directory
+        subprocess.run(["python", game_path], cwd=game_dir)
+    else:
+        print(f"File not found: {game_path}")
+
+
+def launch_game(game_name):
+    print(f"Current working directory: {os.getcwd()}")
+    if game_name == "Aadu Puli Aatam":
+        game_dir = os.path.join(os.getcwd(), "Lambs-and-Tigers")
+        game_path = os.path.join(game_dir, "Tiger.py")
+    else:
+        game_dir = os.path.join(os.getcwd(), game_name)
+        game_path = os.path.join(game_dir, f"{game_name}.py")
+    
+    print(f"Attempting to launch game at path: {game_path}")
+    if os.path.isfile(game_path):
+        # Run the game in a separate process and change the working directory
+        subprocess.run(["python", game_path], cwd=game_dir)
+    else:
+        print(f"File not found: {game_path}")
+
+def launch_game(game_name):
+    print(f"Current working directory: {os.getcwd()}")
+    if game_name == "Pallankuzhi":
+        game_dir = os.path.join(os.getcwd(), "pallankuzhi20000")
+        game_path = os.path.join(game_dir, "pallankuzhi.py")
+    else:
+        game_dir = os.path.join(os.getcwd(), game_name)
+        game_path = os.path.join(game_dir, f"{game_name}.py")
+    
+    print(f"Attempting to launch game at path: {game_path}")
+    if os.path.isfile(game_path):
+        # Run the game in a separate process and change the working directory
+        subprocess.run(["python", game_path], cwd=game_dir)
+    else:
+        print(f"File not found: {game_path}")
 
 def display_image(image_name):
     running = True
@@ -135,5 +203,7 @@ def display_image(image_name):
             if event.type == pygame.QUIT or (event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE):
                 running = False
 
+
 if __name__ == "__main__":
     main_menu()
+    pygame.mixer.music.stop()
