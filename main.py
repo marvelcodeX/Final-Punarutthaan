@@ -5,11 +5,8 @@ import os
 # Initialize Pygame
 pygame.init()
 
-pygame.mixer.init()
 
-# Load and play background music
-pygame.mixer.music.load('bgmusic.dat.mp3') 
-pygame.mixer.music.play(-1)
+
 
 # Screen dimensions
 WIDTH, HEIGHT = 900, 650
@@ -30,8 +27,8 @@ background = pygame.transform.scale(background, (WIDTH, HEIGHT))
 # Load traditional-looking fonts
 font_large = pygame.font.SysFont('Times New Roman', 60)
 font_lesslarge = pygame.font.SysFont('Times New Roman',35)
-font_medium = pygame.font.SysFont('Times New Roman', 35)
-font_small = pygame.font.SysFont('Times New Roman', 35)
+font_medium = pygame.font.SysFont('Times New Roman', 25)
+font_small = pygame.font.SysFont('Times New Roman', 20)
 
 # Button settings
 button_width, button_height = 300, 70
@@ -81,15 +78,15 @@ def main_menu():
 
         
         # Draw game buttons and links
-        draw_button(screen, "Pallankuzhi", button_x, button_y_start, button_width, button_height)
+        draw_button(screen, "Pallankuzhi (Bot)", button_x, button_y_start, button_width, button_height)
         draw_link(screen, "Rules", button_x + button_width // 4, button_y_start + button_height + 20)
         draw_link(screen, "History", button_x + 3 * button_width // 4, button_y_start + button_height + 20)
 
-        draw_button(screen, "Pagade", button_x, button_y_start + 2 * (button_height + button_padding), button_width, button_height)
+        draw_button(screen, "Pagade(Multiplayer)", button_x, button_y_start + 2 * (button_height + button_padding), button_width, button_height)
         draw_link(screen, "Rules", button_x + button_width // 4, button_y_start + 3 * button_height + 2 * button_padding + 20)
         draw_link(screen, "History", button_x + 3 * button_width // 4, button_y_start + 3 * button_height + 2 * button_padding + 20)
 
-        draw_button(screen, "Aadu Puli Aatam", button_x, button_y_start + 4 * (button_height + button_padding), button_width, button_height)
+        draw_button(screen, "Aadu Puli Aatam(Multiplayer)", button_x, button_y_start + 4 * (button_height + button_padding), button_width, button_height)
         draw_link(screen, "Rules", button_x + button_width // 4, button_y_start + 5 * button_height + 4 * button_padding + 20)
         draw_link(screen, "History", button_x + 3 * button_width // 4, button_y_start + 5 * button_height + 4 * button_padding + 20)
         
@@ -106,7 +103,7 @@ def main_menu():
                     elif button_y_start + 2 * (button_height + button_padding) <= mouse_y <= button_y_start + 3 * button_height + 2 * button_padding:
                         launch_game("Pagade")
                     elif button_y_start + 4 * (button_height + button_padding) <= mouse_y <= button_y_start + 5 * button_height + 4 * button_padding:
-                        launch_game("Aadu Puli Aatam")
+                        launch_game("Lambs-and-Tigers")
                 # Link clicks
                 if button_y_start + button_height <= mouse_y <= button_y_start + button_height + link_padding:
                     if button_x + button_width // 4 - 30 <= mouse_x <= button_x + button_width // 4 + 30:
@@ -126,23 +123,6 @@ def main_menu():
 
     pygame.quit()
 
-'''def launch_game(game_name):
-    game_path = os.path.join(os.getcwd(), game_name, f"{game_name}.py")
-    subprocess.run(["python", game_path])
-def launch_game(game_name):
-    if game_name == "Pagade":
-        game_path = os.path.join(os.getcwd(), "Ludo-Python-game", "main.py")
-    else:
-        game_path = os.path.join(os.getcwd(), game_name, f"{game_name}.py")
-    subprocess.run(["python", game_path])'''
-
-'''def launch_game(game_name):
-    if game_name == "Pagade":
-        game_path = os.path.join(os.getcwd(), "Ludo-Python-game-", "Ludogame.py")
-    else:
-        game_path = os.path.join(os.getcwd(), game_name, f"{game_name}.py")
-    subprocess.run(["python", game_path])'''
-
 def launch_game(game_name):
     print(f"Current working directory: {os.getcwd()}")
     if game_name == "Pagade":
@@ -159,7 +139,6 @@ def launch_game(game_name):
     else:
         print(f"File not found: {game_path}")
 
-
 def launch_game(game_name):
     print(f"Current working directory: {os.getcwd()}")
     if game_name == "Aadu Puli Aatam":
@@ -175,6 +154,12 @@ def launch_game(game_name):
         subprocess.run(["python", game_path], cwd=game_dir)
     else:
         print(f"File not found: {game_path}")
+
+
+
+
+
+
 
 def launch_game(game_name):
     print(f"Current working directory: {os.getcwd()}")
@@ -206,4 +191,4 @@ def display_image(image_name):
 
 if __name__ == "__main__":
     main_menu()
-    pygame.mixer.music.stop()
+    
